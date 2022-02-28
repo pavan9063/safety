@@ -30,27 +30,6 @@ pipeline {
         sh label: '', script: 'terraform apply --auto-approve'
       }
     }
-    stage('TF init') {
-      steps {
-          sh '''
-          ./tf-wrapper.sh init $BRANCH_NAME
-          '''
-        }
-    }
-    stage('TF plan') {
-      steps {
-          sh '''
-          ./tf-wrapper.sh plan $BRANCH_NAME
-          '''
-        }
-    }
-    stage('TF validate') {
-      steps {
-          sh '''
-          ./tf-wrapper.sh validate ${BRANCH_NAME} ${WORKSPACE}/${_POLICY_REPO} ${_PROJECT_ID}
-          '''
-        }
-    }
     // stage('TF wait for approval') {
     //   steps {
     //       script {
@@ -58,13 +37,6 @@ pipeline {
     //       }
     //     }
     // }
-    stage('TF apply') {
-      steps {
-          sh '''
-          ./tf-wrapper.sh apply $BRANCH_NAME
-          '''
-        }
-    }
   }
 }
 
