@@ -20,15 +20,6 @@ pipeline {
         }
     }
     stage('TF plan validate all') {
-      when {
-              not {
-                      anyOf {
-                      branch 'development'
-                      branch 'production'
-                      branch 'non-production'
-                  }
-              }
-      }
       steps {
           sh '''
           ./tf-wrapper.sh plan_validate_all ${BRANCH_NAME} ${WORKSPACE}/${_POLICY_REPO} ${_PROJECT_ID}
@@ -36,13 +27,6 @@ pipeline {
         }
     }
     stage('TF init') {
-      when {
-              anyOf {
-                  branch 'development'
-                  branch 'production'
-                  branch 'non-production'
-              }
-      }
       steps {
           sh '''
           ./tf-wrapper.sh init $BRANCH_NAME
@@ -50,13 +34,6 @@ pipeline {
         }
     }
     stage('TF plan') {
-      when {
-              anyOf {
-                  branch 'development'
-                  branch 'production'
-                  branch 'non-production'
-              }
-      }
       steps {
           sh '''
           ./tf-wrapper.sh plan $BRANCH_NAME
@@ -64,13 +41,6 @@ pipeline {
         }
     }
     stage('TF validate') {
-      when {
-              anyOf {
-                  branch 'development'
-                  branch 'production'
-                  branch 'non-production'
-              }
-      }
       steps {
           sh '''
           ./tf-wrapper.sh validate ${BRANCH_NAME} ${WORKSPACE}/${_POLICY_REPO} ${_PROJECT_ID}
@@ -78,13 +48,6 @@ pipeline {
         }
     }
     // stage('TF wait for approval') {
-    //   when {
-    //           anyOf {
-    //               branch 'development'
-    //               branch 'production'
-    //               branch 'non-production'
-    //           }
-    //   }
     //   steps {
     //       script {
     //       def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
@@ -92,13 +55,6 @@ pipeline {
     //     }
     // }
     stage('TF apply') {
-      when {
-              anyOf {
-                  branch 'development'
-                  branch 'production'
-                  branch 'non-production'
-              }
-      }
       steps {
           sh '''
           ./tf-wrapper.sh apply $BRANCH_NAME
@@ -107,3 +63,4 @@ pipeline {
     }
   }
 }
+
