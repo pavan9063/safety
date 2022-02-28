@@ -19,12 +19,16 @@ pipeline {
           '''
         }
     }
-    stage('TF plan validate all') {
+    stage('Terraform Init') {
       steps {
-          sh '''
-          ./tf-wrapper.sh plan_validate_all ${BRANCH_NAME} ${WORKSPACE}/${_POLICY_REPO} ${_PROJECT_ID}
-          '''
-        }
+        sh label: '', script: 'terraform init'
+      }
+    }
+    
+    stage('Terraform apply') {
+      steps {
+        sh label: '', script: 'terraform apply --auto-approve'
+      }
     }
     stage('TF init') {
       steps {
