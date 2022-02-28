@@ -188,9 +188,9 @@ single_action_runner() {
             echo "unknown option: ${action}"
             ;;
         esac
-      else
-        echo "${env} doesn't match ${branch}; skipping"
-      fi
+    #  else
+    #    echo "${env} doesn't match ${branch}; skipping"
+    #  fi
     done
   done
 }
