@@ -74,8 +74,8 @@ tf_plan() {
     cd "$path" || exit
     terraform plan -input=false -out "${tmp_plan}/${tf_component}-${tf_env}.tfplan" || exit 21
     cd "$base_dir" || exit
-  else
-    echo "ERROR:  ${tf_env} does not exist"
+#  else
+#    echo "ERROR:  ${tf_env} does not exist"
   fi
 }
 
