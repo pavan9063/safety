@@ -163,7 +163,7 @@ single_action_runner() {
     find "$component_path" -mindepth 1 -maxdepth 1 -type d | sort -r | while read -r env_path ; do
       env="$(basename "$env_path")"
       # perform action only if folder matches branch OR folder is shared & branch is production.
-      if [[ "$env" == "$branch" ]] || [[ "$env" == "shared" && "$branch" == "production" ]]; then
+    #  if [[ "$env" == "$branch" ]] || [[ "$env" == "shared" && "$branch" == "production" ]]; then
         case "$action" in
           apply )
             tf_apply "$env_path" "$env" "$component"
